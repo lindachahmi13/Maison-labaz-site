@@ -1,969 +1,246 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lyséa beauty</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #f8f2ec;
-      --bg-soft: #f2e6db;
-      --cream: #fbf7f3;
-      --card: rgba(255,255,255,0.68);
-      --white: #ffffff;
-      --text: #1f1814;
-      --muted: #6c5d55;
-      --line: rgba(31,24,20,0.08);
-      --gold: #b88b67;
-      --gold-soft: #d8b89d;
-      --dark: #171311;
-      --shadow: 0 20px 60px rgba(39, 28, 21, 0.09);
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --max: 1180px;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.95), transparent 26%),
-        radial-gradient(circle at bottom right, rgba(255,255,255,0.55), transparent 20%),
-        linear-gradient(180deg, #fcf8f4 0%, #f4e9de 45%, #f9f3ed 100%);
-      color: var(--text);
-      font-family: "Inter", sans-serif;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(248, 242, 236, 0.72);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(31,24,20,0.05);
-    }
-
-    .nav {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 35px;
-      font-weight: 600;
-      letter-spacing: 1.4px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-cta {
-      padding: 11px 16px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.56);
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 48px 0 34px;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      width: fit-content;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.56);
-      border: 1px solid rgba(31,24,20,0.07);
-      box-shadow: 0 8px 24px rgba(48,35,28,0.05);
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, var(--gold-soft), var(--gold));
-      display: inline-block;
-    }
-
-    h1, h2, h3, h4 {
-      margin: 0;
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 600;
-      letter-spacing: 0.1px;
-      line-height: 0.96;
-    }
-
-    h1 {
-      font-size: clamp(56px, 8vw, 108px);
-      margin-bottom: 18px;
-    }
-
-    .hero-subtitle {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(22px, 2.4vw, 34px);
-      color: #433730;
-      margin-bottom: 16px;
-      line-height: 1.1;
-    }
-
-    .hero-text {
-      max-width: 620px;
-      color: var(--muted);
-      line-height: 1.85;
-      font-size: 15px;
-      margin-bottom: 28px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .btn {
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 500;
-      transition: transform .25s ease, opacity .25s ease, background .25s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: var(--dark);
-      color: white;
-      box-shadow: 0 14px 34px rgba(23,19,17,0.18);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.58);
-      border: 1px solid rgba(31,24,20,0.08);
-      color: var(--text);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .stat-card {
-      background: rgba(255,255,255,0.56);
-      border: 1px solid rgba(31,24,20,0.06);
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: 0 12px 28px rgba(48,35,28,0.05);
-    }
-
-    .stat-card strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 7px;
-    }
-
-    .stat-card span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .hero-visual {
-      min-height: 720px;
-      position: relative;
-      border-radius: 38px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.95), transparent 22%),
-        radial-gradient(circle at 82% 22%, rgba(255,255,255,0.48), transparent 20%),
-        linear-gradient(180deg, #ebdfd4 0%, #dec8b6 46%, #eadcd0 100%);
-      border: 1px solid rgba(255,255,255,0.58);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-visual::before {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      left: 50%;
-      top: 52%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(255,255,255,0.52) 0%, rgba(255,255,255,0) 70%);
-      filter: blur(10px);
-    }
-
-    .visual-soft-light {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0)),
-        linear-gradient(180deg, rgba(23,19,17,0) 45%, rgba(23,19,17,0.08) 100%);
-    }
-
-    .bottle {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -45%);
-      width: 230px;
-      height: 430px;
-      border-radius: 120px 120px 42px 42px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.62), rgba(245,233,220,0.96));
-      border: 1px solid rgba(255,255,255,0.82);
-      box-shadow:
-        inset 0 18px 32px rgba(255,255,255,0.72),
-        inset 0 -26px 42px rgba(198,158,120,0.18),
-        0 30px 50px rgba(62,45,36,0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .bottle::before {
-      content: "";
-      position: absolute;
-      top: -58px;
-      width: 120px;
-      height: 78px;
-      border-radius: 24px 24px 14px 14px;
-      background: linear-gradient(180deg, #e8dccf, #cab5a5);
-      box-shadow: 0 12px 22px rgba(50,37,29,0.12);
-    }
-
-    .bottle::after {
-      content: "";
-      position: absolute;
-      top: -86px;
-      width: 90px;
-      height: 34px;
-      border-radius: 16px 16px 8px 8px;
-      background: linear-gradient(180deg, #d8c8bb, #bca597);
-    }
-
-    .bottle-label {
-      text-align: center;
-      padding: 0 18px;
-    }
-
-    .bottle-brand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 30px;
-      letter-spacing: 1.6px;
-      margin-bottom: 10px;
-    }
-
-    .bottle-name {
-      font-size: 13px;
-      letter-spacing: 2.3px;
-      text-transform: uppercase;
-      color: #5a4b42;
-      line-height: 1.6;
-    }
-
-    .floating {
-      position: absolute;
-      border-radius: 20px;
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.65);
-      border: 1px solid rgba(31,24,20,0.07);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 16px 30px rgba(48,35,28,0.08);
-      color: #554840;
-      font-size: 13px;
-    }
-
-    .floating.one { top: 34px; right: 28px; }
-    .floating.two { left: 24px; bottom: 124px; }
-    .floating.three { right: 24px; bottom: 34px; }
-
-    .section {
-      padding: 46px 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-
-    .section-title {
-      font-size: clamp(38px, 5vw, 62px);
-    }
-
-    .section-head p {
-      max-width: 540px;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .benefit-card {
-      background: var(--card);
-      border: 1px solid rgba(31,24,20,0.07);
-      border-radius: 26px;
-      padding: 26px;
-      box-shadow: 0 12px 30px rgba(48,35,28,0.05);
-    }
-
-    .benefit-no {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-      background: #f0dfd0;
-      color: #7d624d;
-      font-size: 13px;
-      border: 1px solid rgba(125,98,77,0.12);
-    }
-
-    .benefit-card h3 {
-      font-size: 31px;
-      margin-bottom: 10px;
-    }
-
-    .benefit-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .product-panel {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .product-left, .product-right {
-      background: rgba(255,255,255,0.62);
-      border: 1px solid rgba(31,24,20,0.07);
-      border-radius: 30px;
-      box-shadow: 0 14px 36px rgba(48,35,28,0.06);
-    }
-
-    .product-left {
-      padding: 26px;
-    }
-
-    .showcase {
-      min-height: 540px;
-      border-radius: 24px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.96), transparent 26%),
-        linear-gradient(180deg, #f1e5d8 0%, #e3ccb9 100%);
-      display: grid;
-      place-items: center;
-    }
-
-    .showcase .bottle {
-      transform: translate(-50%, -44%) scale(0.94);
-    }
-
-    .shade-strip {
-      position: absolute;
-      left: 22px;
-      right: 22px;
-      bottom: 22px;
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 8px;
-    }
-
-    .shade-strip span {
-      height: 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.45);
-    }
-
-    .product-right {
-      padding: 34px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .product-kicker {
-      color: var(--gold);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .product-title {
-      font-size: clamp(44px, 5vw, 74px);
-      margin-bottom: 14px;
-    }
-
-    .product-copy {
-      color: var(--muted);
-      line-height: 1.9;
-      font-size: 15px;
-      margin-bottom: 18px;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-
-    .price {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 38px;
-      font-weight: 600;
-    }
-
-    .price-note {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 26px;
-    }
-
-    .feature {
-      background: rgba(248,242,236,0.94);
-      border: 1px solid rgba(31,24,20,0.06);
-      border-radius: 18px;
-      padding: 14px 16px;
-      font-size: 14px;
-      color: #544840;
-    }
-
-    .shades-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .shade-card {
-      background: rgba(255,255,255,0.66);
-      border: 1px solid rgba(31,24,20,0.06);
-      border-radius: 20px;
-      padding: 14px;
-      box-shadow: 0 10px 24px rgba(48,35,28,0.04);
-    }
-
-    .swatch {
-      height: 48px;
-      border-radius: 14px;
-      margin-bottom: 10px;
-      border: 1px solid rgba(255,255,255,0.7);
-    }
-
-    .shade-card span {
-      color: #4f433d;
-      font-size: 13px;
-    }
-
-    .clean-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    .clean-panel {
-      background: rgba(255,255,255,0.62);
-      border: 1px solid rgba(31,24,20,0.07);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 14px 36px rgba(48,35,28,0.05);
-    }
-
-    .pill-list, .ingredient-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .pill {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 10px;
-      background: white;
-      border: 1px solid rgba(31,24,20,0.07);
-      border-radius: 999px;
-      padding: 12px 16px;
-      color: #4f433d;
-      font-size: 14px;
-    }
-
-    .ingredient {
-      background: rgba(248,242,236,0.95);
-      border: 1px solid rgba(31,24,20,0.06);
-      border-radius: 20px;
-      padding: 18px;
-    }
-
-    .ingredient strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 8px;
-    }
-
-    .ingredient span {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.75;
-    }
-
-    .signature {
-      padding: 74px 0 84px;
-      text-align: center;
-    }
-
-    .signature-box {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 34px 24px;
-      background: rgba(255,255,255,0.56);
-      border-radius: 30px;
-      border: 1px solid rgba(31,24,20,0.08);
-      box-shadow: 0 14px 36px rgba(48,35,28,0.05);
-    }
-
-    .signature-box p {
-      margin: 0 0 14px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(38px, 4vw, 60px);
-      line-height: 1.06;
-    }
-
-    .signature-box span {
-      color: var(--muted);
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-    }
-
-    footer {
-      padding: 24px 0 34px;
-      border-top: 1px solid rgba(31,24,20,0.06);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .benefits-grid,
-      .product-panel,
-      .clean-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-stats,
-      .shades-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero-visual {
-        min-height: 560px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 26px;
-      }
-
-      h1 {
-        line-height: 0.98;
-      }
-
-      .hero-stats,
-      .features,
-      .shades-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-visual, .showcase {
-        min-height: 470px;
-      }
-
-      .bottle {
-        width: 165px;
-        height: 310px;
-      }
-
-      .bottle::before {
-        width: 88px;
-        height: 58px;
-        top: -42px;
-      }
-
-      .bottle::after {
-        width: 64px;
-        height: 24px;
-        top: -62px;
-      }
-
-      .floating {
-        font-size: 12px;
-        padding: 10px 12px;
-      }
-
-      .floating.one { top: 18px; right: 16px; }
-      .floating.two { left: 16px; bottom: 92px; }
-      .floating.three { right: 16px; bottom: 18px; }
-
-      .section-head {
-        flex-direction: column;
-        align-items: start;
-      }
-
-      .shade-strip {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>1988 by LYSÉA BEAUTY</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f6f1ec;
+    color: #5a4d46;
+}
+
+header {
+    text-align: center;
+    padding: 40px;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.section {
+    padding: 40px;
+    text-align: center;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    width: 220px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.price {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background: #e8dcd3;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+</style>
 </head>
+
 <body>
 
-  <header class="topbar">
-    <div class="container nav">
-      <div class="brand">Maison Labaz</div>
-      <nav class="nav-links">
-        <a href="#concept">Concept</a>
-        <a href="#produit">Produit</a>
-        <a href="#teintes">Teintes</a>
-        <a href="#formule">Formule</a>
-        <a href="#signature" class="nav-cta">Découvrir</a>
-      </nav>
-    </div>
-  </header>
+<header>
+1988 by LYSÉA BEAUTY
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow"><span class="eyebrow-dot"></span> Clean luxury • Teint adaptatif</div>
-          <h1>Voile de Teint Adaptatif</h1>
-          <div class="hero-subtitle">Le fond de teint intelligent qui s’adapte à votre peau et à votre environnement.</div>
-          <p class="hero-text">
-            Une texture seconde peau, un fini naturellement lumineux et une présence élégante du matin jusqu’au soir. Maison Labaz imagine une beauté plus raffinée, plus sensorielle et plus désirable.
-          </p>
+<!-- ROUGES À LÈVRES -->
+<div class="section">
+<h2>Lipsticks</h2>
+<div class="products">
 
-          <div class="hero-actions">
-            <a href="#produit" class="btn btn-primary">Découvrir le produit</a>
-            <a href="#teintes" class="btn btn-secondary">Explorer les teintes</a>
-          </div>
+<div class="card">
+<img src="photo-lipstick.jpg">
+<h3>Red Cherry</h3>
+<p class="price">25€</p>
+<button>Acheter</button>
+</div>
 
-          <div class="hero-stats">
-            <div class="stat-card">
-              <strong>Adaptation intelligente</strong>
-              <span>Réagit aux variations de température et d’humidité pour garder un teint équilibré.</span>
-            </div>
-            <div class="stat-card">
-              <strong>Effet peau nue</strong>
-              <span>Un rendu plus fin, plus élégant et plus naturel qu’un fond de teint classique.</span>
-            </div>
-            <div class="stat-card">
-              <strong>Positionnement premium</strong>
-              <span>Un univers haut de gamme pensé pour sortir du lot dès le premier regard.</span>
-            </div>
-          </div>
-        </div>
+<div class="card">
+<img src="photo-lipstick.jpg">
+<h3>Pink Candy</h3>
+<p class="price">25€</p>
+<button>Acheter</button>
+</div>
 
-        <div class="hero-visual">
-          <div class="visual-soft-light"></div>
-          <div class="floating one">Fini lumineux naturel</div>
-          <div class="floating two">Hydrate sans briller</div>
-          <div class="floating three">Longue tenue élégante</div>
+<div class="card">
+<img src="photo-lipstick.jpg">
+<h3>Nude Beige</h3>
+<p class="price">25€</p>
+<button>Acheter</button>
+</div>
 
-          <div class="bottle">
-            <div class="bottle-label">
-              <div class="bottle-brand">Maison Labaz</div>
-              <div class="bottle-name">Voile de Teint<br>Adaptatif</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="card">
+<img src="photo-lipstick.jpg">
+<h3>Soft Mocha</h3>
+<p class="price">25€</p>
+<button>Acheter</button>
+</div>
 
-    <section id="concept" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Une signature de peau, pas un masque.</h2>
-          <p>
-            Maison Labaz ne propose pas seulement un fond de teint. La marque crée une nouvelle expérience du teint : plus subtile, plus intelligente, plus confortable et plus luxe.
-          </p>
-        </div>
+</div>
+</div>
 
-        <div class="benefits-grid">
-          <div class="benefit-card">
-            <div class="benefit-no">01</div>
-            <h3>Équilibre</h3>
-            <p>La formule maintient la juste balance entre hydratation, confort et matité visible au fil de la journée.</p>
-          </div>
+<!-- LIP CHAIN -->
+<div class="section">
+<h2>Lip Chain</h2>
+<div class="products">
 
-          <div class="benefit-card">
-            <div class="benefit-no">02</div>
-            <h3>Fusion</h3>
-            <p>Le fini épouse la peau avec finesse pour un rendu vivant, flouté et naturellement lumineux.</p>
-          </div>
+<div class="card">
+<img src="photo-lipchain.jpg">
+<h3>1988 Lip Chain</h3>
+<p class="price">32€</p>
+<button>Acheter</button>
+</div>
 
-          <div class="benefit-card">
-            <div class="benefit-no">03</div>
-            <h3>Présence</h3>
-            <p>Un univers visuel plus éditorial et plus mémorable que les sites cosmétiques trop génériques.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+</div>
+</div>
 
-    <section id="produit" class="section">
-      <div class="container">
-        <div class="product-panel">
-          <div class="product-left">
-            <div class="showcase">
-              <div class="bottle">
-                <div class="bottle-label">
-                  <div class="bottle-brand">Maison Labaz</div>
-                  <div class="bottle-name">Adaptive Skin Veil</div>
-                </div>
-              </div>
+<!-- CRAYONS -->
+<div class="section">
+<h2>Lip Sculpt Pencil</h2>
+<div class="products">
 
-              <div class="shade-strip">
-                <span style="background:#f4ddd0;"></span>
-                <span style="background:#ead0bf;"></span>
-                <span style="background:#dfc0aa;"></span>
-                <span style="background:#cfab8e;"></span>
-                <span style="background:#be9574;"></span>
-                <span style="background:#9d6f4b;"></span>
-                <span style="background:#80563a;"></span>
-                <span style="background:#5c3925;"></span>
-              </div>
-            </div>
-          </div>
+<div class="card">
+<img src="photo-pencil.jpg">
+<h3>Nude Beige</h3>
+<p>1988</p>
+<p class="price">22€</p>
+<button>Acheter</button>
+</div>
 
-          <div class="product-right">
-            <div class="product-kicker">Maison Labaz • Teint</div>
-            <h2 class="product-title">Voile de Teint Adaptatif</h2>
-            <p class="product-copy">
-              Un fond de teint nouvelle génération qui fusionne avec la peau pour offrir un fini naturel, lumineux et longue tenue. Sa formule enrichie en actifs adaptatifs réagit aux variations de votre environnement pour maintenir l’équilibre parfait entre hydratation et matité.
-            </p>
+<div class="card">
+<img src="photo-pencil.jpg">
+<h3>Soft Mocha</h3>
+<p>1988</p>
+<p class="price">22€</p>
+<button>Acheter</button>
+</div>
 
-            <div class="price-row">
-              <div class="price">48€</div>
-              <div class="price-note">Luxe accessible • rechargeable</div>
-            </div>
+<div class="card">
+<img src="photo-pencil.jpg">
+<h3>Pink Nude</h3>
+<p>1988</p>
+<p class="price">22€</p>
+<button>Acheter</button>
+</div>
 
-            <div class="features">
-              <div class="feature">✔ S’adapte à l’humidité et à la température</div>
-              <div class="feature">✔ Hydrate sans briller</div>
-              <div class="feature">✔ Effet peau nue</div>
-              <div class="feature">✔ Longue tenue sans effet masque</div>
-              <div class="feature">✔ Lisse et floute les imperfections</div>
-              <div class="feature">✔ Convient à tous les types de peau</div>
-            </div>
+</div>
+</div>
 
-            <div class="hero-actions">
-              <a href="#teintes" class="btn btn-primary">Trouver ma teinte</a>
-              <a href="#formule" class="btn btn-secondary">Découvrir la formule</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- PARFUMS -->
+<div class="section">
+<h2>Fragrances</h2>
+<div class="products">
 
-    <section id="teintes" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Une gamme sobre, efficace, désirable.</h2>
-          <p>
-            Une sélection de teintes pensée pour démarrer avec élégance, puis s’élargir ensuite. Chaque nuance garde une sensation cohérente, premium et instagrammable.
-          </p>
-        </div>
+<div class="card">
+<img src="photo-parfum.jpg">
+<h3>Sun Veil</h3>
+<p class="price">89€</p>
+<button>Acheter</button>
+</div>
 
-        <div class="shades-grid">
-          <div class="shade-card">
-            <div class="swatch" style="background:#f4ddd0;"></div>
-            <span>01 — Porcelaine</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#ead0bf;"></div>
-            <span>02 — Ivoire</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#dfc0aa;"></div>
-            <span>03 — Beige clair</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#cfab8e;"></div>
-            <span>04 — Beige naturel</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#be9574;"></div>
-            <span>05 — Beige doré</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#9d6f4b;"></div>
-            <span>06 — Miel</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#80563a;"></div>
-            <span>07 — Caramel</span>
-          </div>
-          <div class="shade-card">
-            <div class="swatch" style="background:#5c3925;"></div>
-            <span>08 — Ébène</span>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="card">
+<img src="photo-parfum.jpg">
+<h3>Velvet Night</h3>
+<p class="price">99€</p>
+<button>Acheter</button>
+</div>
 
-    <section id="formule" class="section">
-      <div class="container clean-grid">
-        <div class="clean-panel">
-          <h2 class="section-title" style="font-size: clamp(32px, 4vw, 52px);">Formule clean</h2>
-          <div class="pill-list">
-            <div class="pill">Sans parabènes</div>
-            <div class="pill">Sans silicones lourds</div>
-            <div class="pill">Vegan</div>
-            <div class="pill">Non testé sur les animaux</div>
-            <div class="pill">Pompe rechargeable</div>
-          </div>
-        </div>
+</div>
+</div>
 
-        <div class="clean-panel">
-          <h2 class="section-title" style="font-size: clamp(32px, 4vw, 52px);">Actifs signature</h2>
-          <div class="ingredient-list">
-            <div class="ingredient">
-              <strong>Acide hyaluronique intelligent</strong>
-              <span>Aide à préserver le confort de la peau et la sensation d’hydratation tout au long de la journée.</span>
-            </div>
+<!-- MASQUES LÈVRES -->
+<div class="section">
+<h2>Lip Masks</h2>
+<div class="products">
 
-            <div class="ingredient">
-              <strong>Poudres végétales matifiantes</strong>
-              <span>Réduisent la brillance visible tout en conservant un rendu vivant, doux et sophistiqué.</span>
-            </div>
+<div class="card">
+<img src="photo-mask.jpg">
+<h3>Kiss Me</h3>
+<p class="price">7€</p>
+<button>Acheter</button>
+</div>
 
-            <div class="ingredient">
-              <strong>Complexe protecteur anti-pollution</strong>
-              <span>Contribue à préserver l’éclat visuel du teint face au rythme et à l’environnement urbain.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="card">
+<img src="photo-mask.jpg">
+<h3>Repair Me</h3>
+<p class="price">7€</p>
+<button>Acheter</button>
+</div>
 
-    <section id="signature" class="signature">
-      <div class="container">
-        <div class="signature-box">
-          <p>“La beauté qui s’adapte à vous.”</p>
-          <span>Maison Labaz</span>
-        </div>
-      </div>
-    </section>
-  </main>
+</div>
+</div>
 
-  <footer>
-    <div class="container footer-row">
-      <div>Maison Labaz © 2026</div>
-      <div>Clean luxury • Beauté adaptative • Teint</div>
-    </div>
-  </footer>
+<!-- MASQUES VISAGE -->
+<div class="section">
+<h2>Face Masks</h2>
+<div class="products">
+
+<div class="card">
+<img src="photo-avocado.jpg">
+<h3>Avocado Glow</h3>
+<p class="price">9€</p>
+<button>Acheter</button>
+</div>
+
+<div class="card">
+<img src="photo-carrot.jpg">
+<h3>Carrot Radiance</h3>
+<p class="price">9€</p>
+<button>Acheter</button>
+</div>
+
+<div class="card">
+<img src="photo-cotton.jpg">
+<h3>Cotton Soft</h3>
+<p class="price">9€</p>
+<button>Acheter</button>
+</div>
+
+</div>
+</div>
+
+<!-- POCHETTE -->
+<div class="section">
+<h2>Accessories</h2>
+<div class="products">
+
+<div class="card">
+<img src="photo-pouch.jpg">
+<h3>Cloud Pouch</h3>
+<p class="price">35€</p>
+<button>Acheter</button>
+</div>
+
+</div>
+</div>
 
 </body>
 </html>
